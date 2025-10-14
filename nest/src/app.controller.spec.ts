@@ -18,5 +18,9 @@ describe('AppController', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hello World!');
     });
+
+    it(`should return "Hi K8s, i'm running in ${process.env.ENVIRONMENT} environment!!!"`, () => {
+      expect(appController.getK8s()).toBe(`Hi K8s, i'm running in ${process.env.ENVIRONMENT} environment!!!`);
+    });
   });
 });
