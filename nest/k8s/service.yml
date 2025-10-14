@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nest-svc
+
+spec:
+  type: ClusterIP
+  selector:
+    app: nest
+  ports:
+    - port: 80
+      targetPort: 3000
