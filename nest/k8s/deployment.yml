@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nest
-          image: devgbmoraes/k8s-fundamentals:v6
+          image: devgbmoraes/k8s-fundamentals:v7
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
@@ -64,3 +64,10 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+          volumeMounts:
+            - name: nest-data
+              mountPath: /usr/src/app/uploads
+      volumes:
+        - name: nest-data
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim
