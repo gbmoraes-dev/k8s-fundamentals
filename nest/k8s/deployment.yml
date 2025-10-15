@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nest
-          image: devgbmoraes/k8s-fundamentals:v5
+          image: devgbmoraes/k8s-fundamentals:v6
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
@@ -30,6 +30,33 @@ spec:
                 name: nest-secrets
           ports:
             - containerPort: 3000
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+            periodSeconds: 10
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 3000
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+            periodSeconds: 15
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            failureThreshold: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+            periodSeconds: 10
+            initialDelaySeconds: 5
           resources:
             requests:
               cpu: 100m
