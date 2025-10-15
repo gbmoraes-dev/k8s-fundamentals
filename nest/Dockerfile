@@ -44,7 +44,7 @@ COPY --from=prod-deps --chown=nodejs:nodejs /usr/src/app/node_modules ./node_mod
 COPY --from=prod-deps --chown=nodejs:nodejs /usr/src/app/package.json ./package.json
 COPY --from=build --chown=nodejs:nodejs /usr/src/app/dist ./dist
 
-USER nodejs
+# USER nodejs
 
 EXPOSE 3000
 
